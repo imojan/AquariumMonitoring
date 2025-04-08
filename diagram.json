@@ -1,0 +1,68 @@
+{
+    "version": 1,
+    "author": "Fauzan (Modified by ChatGPT)",
+    "editor": "wokwi",
+    "parts": [
+      { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": -76.8, "left": 4.84, "attrs": {} },
+      { "type": "board-ds18b20", "id": "temp1", "top": -135.53, "left": 196.08, "attrs": {} },
+      {
+        "type": "wokwi-photoresistor-sensor",
+        "id": "ldr1",
+        "top": -73.6,
+        "left": -287.2,
+        "attrs": {}
+      },
+      {
+        "type": "wokwi-lcd1602",
+        "id": "lcd1",
+        "top": -435.2,
+        "left": 216.8,
+        "attrs": { "pins": "i2c" }
+      },
+      { "type": "wokwi-led", "id": "led1", "top": -272.4, "left": 167, "attrs": { "color": "red" } },
+      {
+        "type": "wokwi-led",
+        "id": "led2",
+        "top": -195.6,
+        "left": 147.8,
+        "attrs": { "color": "red" }
+      },
+      {
+        "type": "wokwi-resistor",
+        "id": "r1",
+        "top": 14.4,
+        "left": -48.55,
+        "rotate": 90,
+        "attrs": { "value": "10000" }
+      },
+      {
+        "type": "wokwi-resistor",
+        "id": "r2",
+        "top": 177.6,
+        "left": -106.15,
+        "rotate": 90,
+        "attrs": { "value": "220" }
+      }
+    ],
+    "connections": [
+      [ "esp:TX", "$serialMonitor:RX", "", [] ],
+      [ "esp:RX", "$serialMonitor:TX", "", [] ],
+      [ "temp1:DQ", "esp:15", "green", [] ],
+      [ "temp1:VCC", "esp:3V3", "red", [] ],
+      [ "temp1:GND", "esp:GND.2", "black", [] ],
+      [ "ldr1:VCC", "esp:3V3", "red", [] ],
+      [ "ldr1:GND", "r1:1", "black", [] ],
+      [ "r1:2", "esp:GND.1", "black", [] ],
+      [ "ldr1:OUT", "esp:34", "blue", [] ],
+      [ "lcd1:SDA", "esp:21", "blue", [] ],
+      [ "lcd1:SCL", "esp:22", "green", [] ],
+      [ "lcd1:VCC", "esp:3V3", "red", [] ],
+      [ "lcd1:GND", "esp:GND.1", "black", [] ],
+      [ "esp:18", "r2:1", "green", [] ],
+      [ "r2:2", "led1:A", "green", [] ],
+      [ "led1:C", "esp:GND.1", "black", [] ],
+      [ "esp:19", "led2:A", "green", [] ],
+      [ "led2:C", "esp:GND.1", "black", [] ]
+    ],
+    "dependencies": {}
+  }
